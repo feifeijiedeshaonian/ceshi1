@@ -3,6 +3,7 @@ from runmethod import RunMethod
 from get_data import GetData
 from jsonpath_rw import parse
 import json
+import os
 from operation_json import OperationJson
 
 
@@ -26,7 +27,12 @@ class DependentData:
         url = self.data.get_request_url(row_num)
         token = self.data.get_token(row_num)
         if token == 'yes':
-            op_json = OperationJson(r"E:\jiekoudata\cookie.json")
+            # 获取当前文件路径
+            current_path = os.path.abspath(__file__)
+            # 获取当前文件的父目录
+            father_path = os.path.dirname(current_path)
+            path = os.path.join(father_path, "wenjian", "cookie.json")
+            op_json = OperationJson(path)
             token = op_json.get_data("access_token")
             tokens = {'Authorization': "Bearer " + token}  
             # 将header与token合并
