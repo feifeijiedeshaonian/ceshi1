@@ -7,6 +7,7 @@ import json
 from operation_header import OperationHeader
 from operation_json import OperationJson
 from send_email import send_main
+import os
 
 
 class RunTest:
@@ -48,7 +49,12 @@ class RunTest:
                     op_header.write_token(res["data"])
                     res = json.dumps(res)
                 elif token == 'yes':
-                    op_json = OperationJson(r"E:\jiekoudata\cookie.json")
+                    # 获取当前文件路径
+                    current_path = os.path.abspath(__file__)
+                    # 获取当前文件的父目录
+                    father_path = os.path.dirname(current_path)
+                    path = os.path.join(father_path, "wenjian", "cookie.json")
+                    op_json = OperationJson(path)
                     token = op_json.get_data("access_token")
                     tokens = {'Authorization': "Bearer " + token}  
                     # 将header与token合并

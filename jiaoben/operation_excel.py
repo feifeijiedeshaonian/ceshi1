@@ -1,6 +1,7 @@
 # coding:utf-8
 import xlrd
 from xlutils.copy import copy
+import os
 
 
 class OperationExcel:
@@ -10,7 +11,12 @@ class OperationExcel:
             self.file_name = file_name
             self.sheet_id = sheet_id
         else:
-            self.file_name = r"E:\jiekoudata\case1.xls"
+            # 获取当前文件路径
+            current_path = os.path.abspath(__file__)
+            # 获取当前文件的父目录
+            father_path = os.path.dirname(current_path)
+            path = os.path.join(father_path, "wenjian", "case1.xls")
+            self.file_name = path
             self.sheet_id = 0
         self.data = self.get_data()
 

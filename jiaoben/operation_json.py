@@ -1,11 +1,17 @@
 import json
+import os
 
 
 class OperationJson:
 
     def __init__(self, file_path=None):
         if file_path == None:
-            self.file_path = r"E:\jiekoudata\user.json"
+            # 获取当前文件路径
+            current_path = os.path.abspath(__file__)
+            # 获取当前文件的父目录
+            father_path = os.path.dirname(current_path)
+            path = os.path.join(father_path, "wenjian", "user.json")
+            self.file_path = path
         else:
             self.file_path = file_path
         self.data = self.read_data()
@@ -22,7 +28,12 @@ class OperationJson:
 
     # 写json
     def write_data(self, data):
-        with open(r"E:\jiekoudata\cookie.json", 'w') as fp:
+        # 获取当前文件路径
+        current_path = os.path.abspath(__file__)
+        # 获取当前文件的父目录
+        father_path = os.path.dirname(current_path)
+        path = os.path.join(father_path, "wenjian", "cookie.json")
+        with open(path, 'w') as fp:
             fp.write(json.dumps(data))
 
 
